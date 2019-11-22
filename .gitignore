@@ -7,3 +7,6 @@
 web/node_modules
 web/.npm
 web/.config
+web/build
+api/tmp
+api/log

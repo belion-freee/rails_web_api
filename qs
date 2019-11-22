@@ -63,7 +63,7 @@ create_project() {
   bundle_cmd install
 
   echoing "Exec rails new with postgresql and webpack"
-  bundle_exec rails new ./api -f -d=$db_option$front_option$test_option$api_option
+  bundle_exec rails new . -f -d=$db_option$front_option$test_option$api_option
 
   echoing "Exec Bundle Update for alerts"
   bundle_cmd update
