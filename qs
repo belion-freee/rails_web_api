@@ -88,7 +88,7 @@ create_project() {
 init_services() {
     echoing "Building containers"
     $dc down -v
-    $dc build --no-cache $app
+    $dc build --no-cache web
 
     bundle_cmd install
 
@@ -101,7 +101,10 @@ init_services() {
 
     rm_pids
 
-    $dc up $app
+    run_npm install
+    build_cmd
+
+    $dc up web
 }
 
 compose_up() {
@@ -318,11 +321,15 @@ run_yarn() {
 }
 
 run_npm() {
-  run_app npm $*
+  invoke_run web npm $*
 }
 
 run_webpack() {
-  run_app webpack $*
+  invoke_run web npm run webpack $*
+}
+
+build_cmd() {
+  run_npm run build $*
 }
 
 cmd=$1
@@ -421,6 +428,9 @@ case "$cmd" in
     solargraph)
         solargraph_cmd $*
         ;;
+    nb)
+        build_cmd $*
+        ;;
     *)
         read -d '' help <<-EOF
 Usage: $0 command
@@ -450,8 +460,6 @@ App:
   cons     Run rails console
   rubocop  [args] Run rubocop
   yarn      Run yarn command in application container
-  npm       Run npm  command in application container
-  webpack   Run webpack  command in application container
 
 Spring
   spring    Exec spring command in Spring container
@@ -462,6 +470,11 @@ Spring
 
 Solargraph
   solargraph Run solargraph command in Spring container
+
+Web
+  npm       Run npm command
+  nb        Run webpacker build
+  webpack   Run webpack  command in application container
 
 DB:
   reset-db  reset database in DB container
