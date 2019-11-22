@@ -22,7 +22,7 @@ services:
       - db
   web:
     build: ./web
-    command: npm run dev
+    command: npm start
     volumes:
       - ./web:/app:cached
     environment:

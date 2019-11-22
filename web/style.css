@@ -1,0 +1,12 @@
+body {
+  text-align: center;
+  overflow: visible !important;
+  background: #cddc393d;
+ }
+
+#contents {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 42%;
+  text-align: left;
+}
