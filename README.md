@@ -7,6 +7,12 @@ It may be easier to fork. In that case, please change the repository name from S
 API application configured by Ruby on Rails.
 Read the [README](https://github.com/belion-freee/rails_web_api/blob/master/api/README.md) in the api folder for details.
 
+### API Document
+API documentation is managed by [Swagger]().
+If you wana see the document, please execute `./qs up doc`.
+
+And access to `http://localhost:80`.
+
 ## WEB
 Front application configured by TypeScript.
 Read the [README](https://github.com/belion-freee/rails_web_api/blob/master/web/README.md) in the web folder for details.

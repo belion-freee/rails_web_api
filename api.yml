@@ -1,0 +1,180 @@
+swagger: "2.0"
+info:
+  description: "This is a template web api server"
+  version: 1.0.0
+  title: "Rails and TypeScript Web APP by Docker"
+  termsOfService: "https://github.com/belion-freee/rails_web_api/"
+  contact:
+    email: "belion.freee@gmail.com"
+  license:
+    name: License
+    url: "https://github.com/belion-freee/rails_web_api/blob/master/README.md"
+basePath: /v1
+tags:
+  - name: contents
+    description: Everything about your contents
+    externalDocs:
+      description: Find out more
+      url: "https://github.com/belion-freee/rails_web_api/blob/master/api/README.md"
+schemes:
+  - http
+paths:
+  /contents:
+    get:
+      tags:
+        - contents
+      summary: Find all contents
+      description: Returns all contents
+      operationId: getcontents
+      consumes:
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            $ref: "#/definitions/Content"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: contents not found
+      security:
+        - api_key: []
+        - contentsstore_auth:
+            - "write:contentss"
+            - "read:contentss"
+    post:
+      tags:
+        - contents
+      summary: Add a new contents
+      x-swagger-router-controller: ContentController
+      description: ""
+      operationId: addcontents
+      consumes:
+        - multipart/form-data
+        - application/x-www-form-urlencoded
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: contents object that needs to be added
+          required: false
+          schema:
+            $ref: "#/definitions/Content"
+      responses:
+        "405":
+          description: Invalid input
+      security:
+        - contentsstore_auth:
+            - "write:contentss"
+            - "read:contentss"
+  "/contents/{id}":
+    get:
+      tags:
+        - contents
+      summary: Find contents by ID
+      description: Returns a single contents
+      operationId: getcontentsById
+      consumes:
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: ID of contents to return
+          required: true
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            $ref: "#/definitions/Content"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: contents not found
+      security:
+        - api_key: []
+        - contentsstore_auth:
+            - "write:contentss"
+            - "read:contentss"
+    put:
+      tags:
+        - contents
+      summary: Updates a contents
+      description: ""
+      operationId: updatecontentsWithForm
+      consumes:
+        - multipart/form-data
+        - application/x-www-form-urlencoded
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: ID of contents that needs to be updated
+          required: true
+          type: string
+        - name: body
+          in: formData
+          description: Updated body of the contents
+          required: true
+          type: string
+      responses:
+        "405":
+          description: Invalid input
+      security:
+        - contentsstore_auth:
+            - "write:contentss"
+            - "read:contentss"
+    delete:
+      tags:
+        - contents
+      summary: Deletes a contents
+      description: ""
+      operationId: deletecontents
+      consumes:
+        - multipart/form-data
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: contents id to delete
+          required: true
+          type: integer
+          format: int64
+      responses:
+        "400":
+          description: Invalid contents value
+      security:
+        - contentsstore_auth:
+            - "write:contentss"
+            - "read:contentss"
+definitions:
+  Content:
+    properties:
+      id:
+        type: integer
+        format: int64
+      body:
+        type: string
+  ApiResponse:
+    properties:
+      code:
+        type: integer
+        format: int32
+      type:
+        type: string
+      message:
+        type: string
+externalDocs:
+  description: Find out more
+  url: "https://github.com/belion-freee/rails_web_api/"

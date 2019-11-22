@@ -32,6 +32,14 @@ services:
     tty: true
     links:
       - api
+  doc:
+    image: swaggerapi/swagger-ui
+    volumes:
+      - ./api.yml:/usr/share/nginx/html/api.yml
+    environment:
+      API_URL: api.yml
+    ports:
+      - "80:8080"
 
 volumes:
   bundle:
