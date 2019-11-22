@@ -1,24 +1,20 @@
-# README
+# RESTful API
+RESTful API created by Ruby on Rails.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## endpoints
+Those endpoints are available.
 
-Things you may want to cover:
+### GET /contents
+get all contents.
 
-* Ruby version
+### GET /contents/{id}
+get contents specified id.
 
-* System dependencies
+### POST /contents
+create new contents.
 
-* Configuration
+### PUT /contents/{id}
+update contents specified id.
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### DELETE /contents/{id}
+delete contents specified id.
